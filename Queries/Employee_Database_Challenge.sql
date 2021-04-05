@@ -62,5 +62,20 @@ SELECT * FROM mentorship_eligibility;
 -- Summary Code: High-level insights 
 
 -- (I) COUNT the number of roles needed to be filled due to impending "silver tsunami" 
+	-- 90398 roles
+	SELECT * FROM retiring_titles;
+	SELECT SUM(COUNT) FROM retiring_titles;
 
 -- (II) Are there enough qualified, retirement-ready employees in the departments to mentor the next generation of PH employees?
+	-- only 1549 mentors
+SELECT * FROM mentorship_eligibility;
+SELECT COUNT(title) as mentors, me.title
+INTO mentor_count
+FROM mentorship_eligibility as me
+GROUP BY me.title
+ORDER BY title DESC;
+--Sum the total number of eligible mentors
+SELECT SUM(mc.mentors) as total 
+FROM mentor_count as mc;
+
+-- What other queries can be performed to dig deeper into data in preparatin for "silver tsunami"
